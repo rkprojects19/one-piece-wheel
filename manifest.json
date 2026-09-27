@@ -1,0 +1,16 @@
+{
+  "name": "One Piece Wheel",
+  "short_name": "OP Wheel",
+  "description": "A pirate-helm spin wheel for generating random One Piece character traits.",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "background_color": "#f4e4bd",
+  "theme_color": "#c8891a",
+  "orientation": "any",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

@@ -1,0 +1,1253 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>One Piece Wheel</title>
+<meta name="description" content="A pirate-helm spin wheel for generating random One Piece character traits — race, Devil Fruit, Haki, and stats.">
+<meta name="theme-color" content="#c8891a">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&display=swap');
+
+  :root{
+    --ink:#1c1206;
+    --ink-soft:#5e4a28;
+    --bg:#f4e4bd;
+    --surface:#fffaee;
+    --surface-2:#ecd99e;
+    --brass:#c8891a;
+    --brass-light:#f0b429;
+    --teal:#1a5a9e;
+    --teal-light:#2f7fce;
+    --crimson:#a3241f;
+    --crimson-light:#cf3a2f;
+    --line:rgba(28,18,6,0.20);
+    --shadow:rgba(28,18,6,0.32);
+    --seg-a:#1a5a9e;
+    --seg-b:#c8891a;
+    --seg-c:#a3241f;
+    --seg-d:#241a10;
+    --seg-e:#2f7fce;
+    --seg-f:#f0b429;
+    --seg-text:#fffaee;
+    color-scheme:light;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ink:#f3e6c4;
+      --ink-soft:#c2a76e;
+      --bg:#081824;
+      --surface:#0f2534;
+      --surface-2:#153348;
+      --brass:#f0b429;
+      --brass-light:#ffd166;
+      --teal:#3f8fd6;
+      --teal-light:#68acea;
+      --crimson:#e2564f;
+      --crimson-light:#ef7a72;
+      --line:rgba(243,230,196,0.18);
+      --shadow:rgba(0,0,0,0.55);
+      --seg-a:#123a56;
+      --seg-b:#5c4212;
+      --seg-c:#5c211c;
+      --seg-d:#140d06;
+      --seg-e:#184a6e;
+      --seg-f:#7a5c16;
+      --seg-text:#f3e6c4;
+      color-scheme:dark;
+    }
+  }
+  :root[data-theme="dark"]{
+    --ink:#f3e6c4;
+    --ink-soft:#c2a76e;
+    --bg:#081824;
+    --surface:#0f2534;
+    --surface-2:#153348;
+    --brass:#f0b429;
+    --brass-light:#ffd166;
+    --teal:#3f8fd6;
+    --teal-light:#68acea;
+    --crimson:#e2564f;
+    --crimson-light:#ef7a72;
+    --line:rgba(243,230,196,0.18);
+    --shadow:rgba(0,0,0,0.55);
+    --seg-a:#123a56;
+    --seg-b:#5c4212;
+    --seg-c:#5c211c;
+    --seg-d:#140d06;
+    --seg-e:#184a6e;
+    --seg-f:#7a5c16;
+    --seg-text:#f3e6c4;
+    color-scheme:dark;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{ margin:0; padding:0; }
+  body{
+    background:
+      repeating-linear-gradient(135deg, var(--surface-2) 0px, var(--surface-2) 1.5px, transparent 1.5px, transparent 34px),
+      var(--bg);
+    color:var(--ink);
+    font-family:'Archivo',system-ui,sans-serif;
+    padding:28px 16px 48px;
+    display:flex;
+    justify-content:center;
+  }
+  img{ max-width:100%; }
+  [hidden]{ display:none !important; }
+  .page{
+    width:100%;
+    max-width:1080px;
+    display:flex;
+    flex-direction:column;
+    gap:22px;
+  }
+
+  header.top{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:8px;
+    text-align:center;
+  }
+  .brand-row{
+    display:flex;
+    align-items:center;
+    gap:12px;
+  }
+  .jolly-roger{
+    width:38px;
+    height:38px;
+    color:var(--ink);
+    flex:0 0 auto;
+  }
+  .brand{
+    font-family:'Archivo',sans-serif;
+    font-weight:800;
+    font-size:clamp(28px,5vw,40px);
+    color:var(--ink);
+    letter-spacing:-0.01em;
+    text-wrap:balance;
+  }
+  .mode-toggle{
+    display:flex;
+    justify-content:center;
+    gap:0;
+    align-self:center;
+    border:2px solid var(--brass);
+    border-radius:999px;
+    padding:3px;
+    background:var(--surface);
+  }
+  .mode-btn{
+    font-family:'Archivo',sans-serif;
+    font-weight:700;
+    font-size:13px;
+    padding:9px 18px;
+    border-radius:999px;
+    border:none;
+    background:transparent;
+    color:var(--ink-soft);
+    cursor:pointer;
+  }
+  .mode-btn.active{
+    background:var(--brass);
+    color:var(--seg-text);
+  }
+
+  .create-progress{
+    font-family:'Archivo',sans-serif;
+    font-weight:700;
+    font-size:14px;
+    color:var(--crimson);
+    text-align:center;
+    letter-spacing:0.02em;
+  }
+
+  .wanted-card{
+    background:var(--surface);
+    border:5px double var(--ink);
+    border-radius:2px;
+    padding:22px 24px 26px;
+    max-width:100%;
+  }
+  .wanted-heading{
+    font-family:'Archivo',sans-serif;
+    font-weight:800;
+    font-size:clamp(28px,7vw,40px);
+    letter-spacing:0.12em;
+    color:var(--ink);
+    text-align:center;
+  }
+  .wanted-sub{
+    font-family:'Archivo',sans-serif;
+    font-weight:700;
+    font-size:11.5px;
+    letter-spacing:0.22em;
+    text-transform:uppercase;
+    color:var(--crimson);
+    text-align:center;
+    margin-top:2px;
+  }
+  .wanted-portrait{
+    width:120px;
+    height:120px;
+    margin:16px auto 4px;
+    border:3px solid var(--ink);
+    border-radius:4px;
+    background:var(--surface-2);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .wanted-portrait svg{ width:74px; height:74px; color:var(--ink-soft); }
+  .wanted-bounty{
+    font-family:'Archivo',sans-serif;
+    font-weight:800;
+    font-size:15px;
+    text-align:center;
+    color:var(--ink);
+    letter-spacing:0.04em;
+    margin:10px 0 16px;
+  }
+  .wanted-bounty span{ color:var(--crimson); }
+  .character-list{
+    display:flex;
+    flex-direction:column;
+    gap:0;
+    text-align:left;
+    margin-top:4px;
+    max-height:36vh;
+    overflow-y:auto;
+    border-top:2px solid var(--ink);
+    padding-top:4px;
+  }
+  .character-row{
+    display:flex;
+    justify-content:space-between;
+    gap:14px;
+    padding:9px 0;
+    border-top:1px solid var(--line);
+  }
+  .character-row:first-child{ border-top:none; }
+  .character-label{
+    font-family:'Archivo',sans-serif;
+    font-weight:700;
+    font-size:12.5px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    flex:0 0 auto;
+  }
+  .character-value{
+    font-family:'Archivo',sans-serif;
+    font-weight:600;
+    font-size:14px;
+    color:var(--ink);
+    text-align:right;
+  }
+  .character-actions{
+    display:flex;
+    gap:10px;
+    justify-content:center;
+    margin-top:22px;
+    flex-wrap:wrap;
+  }
+
+  .chips{
+    display:flex;
+    gap:8px;
+    overflow-x:auto;
+    padding:4px 2px 10px;
+    scrollbar-width:thin;
+  }
+  .chip{
+    flex:0 0 auto;
+    font-family:'Archivo',sans-serif;
+    font-weight:600;
+    font-size:13px;
+    padding:9px 14px;
+    border-radius:999px;
+    border:1px solid var(--line);
+    background:var(--surface);
+    color:var(--ink-soft);
+    cursor:pointer;
+    white-space:nowrap;
+    transition:background .15s,color .15s,border-color .15s,transform .1s;
+  }
+  .chip:hover{ transform:translateY(-1px); }
+  .chip.active{
+    background:var(--brass);
+    border-color:var(--brass);
+    color:var(--seg-text);
+  }
+  .chip:focus-visible, .icon-btn:focus-visible, .hub-btn:focus-visible, button:focus-visible, textarea:focus-visible{
+    outline:2px solid var(--teal-light);
+    outline-offset:2px;
+  }
+
+  .main-grid{
+    display:grid;
+    grid-template-columns:minmax(0,1fr) minmax(280px,360px);
+    gap:28px;
+    align-items:start;
+  }
+  @media (max-width:760px){
+    .main-grid{ grid-template-columns:1fr; }
+  }
+
+  .wheel-col{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:18px;
+  }
+  .wheel-shell{
+    position:relative;
+    width:min(90vw,480px);
+    aspect-ratio:1/1;
+    cursor:pointer;
+    margin-top:36px;
+  }
+  .wheel-pointer{
+    position:absolute;
+    top:-34px;
+    left:50%;
+    transform:translateX(-50%);
+    width:56px;
+    z-index:5;
+    filter:drop-shadow(0 3px 3px var(--shadow));
+  }
+  .wheel-pointer svg{ display:block; width:100%; height:auto; }
+  .wheel-pointer .tip{
+    position:absolute;
+    left:50%;
+    bottom:-14px;
+    transform:translateX(-50%);
+    width:0; height:0;
+    border-left:9px solid transparent;
+    border-right:9px solid transparent;
+    border-top:16px solid var(--crimson);
+  }
+  .wheel-disc{
+    width:100%;
+    height:100%;
+    border-radius:50%;
+    box-shadow:0 10px 28px var(--shadow), inset 0 0 0 6px var(--surface);
+    transition:transform 4.2s cubic-bezier(.17,.67,.16,1);
+    will-change:transform;
+  }
+  .wheel-disc canvas{
+    width:100%;
+    height:100%;
+    display:block;
+    border-radius:50%;
+  }
+  .hub-btn{
+    position:absolute;
+    top:50%; left:50%;
+    transform:translate(-50%,-50%);
+    width:76px; height:76px;
+    border-radius:50%;
+    z-index:6;
+    border:3px solid var(--brass-light);
+    background:radial-gradient(circle at 35% 30%, var(--brass-light), var(--brass) 70%);
+    color:var(--seg-text);
+    font-family:'Archivo',sans-serif;
+    font-weight:800;
+    font-size:15px;
+    letter-spacing:0.5px;
+    cursor:pointer;
+    box-shadow:0 4px 10px var(--shadow);
+  }
+  .hub-btn:active{ transform:translate(-50%,-50%) scale(0.96); }
+  .hub-btn[disabled]{ opacity:0.7; cursor:default; }
+
+  .wheel-hint{
+    font-family:'Archivo',sans-serif;
+    font-size:12px;
+    color:var(--ink-soft);
+    text-align:center;
+  }
+
+  .legend-card{
+    width:100%;
+    max-width:420px;
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:14px 16px;
+    max-height:190px;
+    overflow-y:auto;
+  }
+  .legend-title{
+    font-family:'Archivo',sans-serif;
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    margin-bottom:8px;
+  }
+  .legend-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(150px,1fr));
+    gap:6px 14px;
+  }
+  .legend-item{
+    font-family:'Archivo',sans-serif;
+    font-size:13px;
+    color:var(--ink);
+    line-height:1.4;
+  }
+
+  .result-modal{
+    position:fixed;
+    inset:0;
+    background:rgba(10,8,2,0.6);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:24px;
+    z-index:50;
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .22s ease;
+  }
+  .result-modal.show{
+    opacity:1;
+    pointer-events:auto;
+  }
+  .result-modal-card{
+    background:var(--surface);
+    border:4px double var(--brass);
+    border-radius:8px;
+    padding:36px 30px;
+    width:440px;
+    max-width:100%;
+    text-align:center;
+    box-shadow:0 24px 60px rgba(0,0,0,0.45);
+    transform:scale(0.88);
+    transition:transform .22s ease;
+  }
+  .result-modal.show .result-modal-card{
+    transform:scale(1);
+  }
+  .result-modal-eyebrow{
+    font-family:'Archivo',sans-serif;
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--crimson);
+    margin-bottom:14px;
+  }
+  .result-modal-text{
+    font-family:'Archivo',sans-serif;
+    font-weight:800;
+    font-size:clamp(26px,5vw,36px);
+    color:var(--ink);
+    line-height:1.2;
+    text-wrap:balance;
+  }
+  .result-modal-close{
+    margin-top:24px;
+    font-family:'Archivo',sans-serif;
+    font-weight:700;
+    font-size:14px;
+    padding:10px 22px;
+    border-radius:6px;
+    border:none;
+    background:var(--brass);
+    color:var(--seg-text);
+    cursor:pointer;
+  }
+
+  .poster{
+    background:var(--surface);
+    border:3px double var(--brass);
+    border-radius:4px;
+    padding:22px 20px;
+    box-shadow:0 8px 20px var(--shadow);
+    position:relative;
+  }
+  .poster::before, .poster::after{
+    content:"";
+    position:absolute;
+    width:12px; height:12px;
+    border-radius:50%;
+    background:var(--brass);
+    box-shadow:inset 0 0 0 2px var(--surface);
+    top:10px;
+  }
+  .poster::before{ left:10px; }
+  .poster::after{ right:10px; }
+  .poster-eyebrow{
+    font-family:'Archivo',sans-serif;
+    font-size:11px;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--teal);
+    margin-bottom:10px;
+  }
+  .poster-result{
+    font-family:'Archivo',sans-serif;
+    font-weight:700;
+    font-size:clamp(22px,3.4vw,28px);
+    line-height:1.15;
+    color:var(--ink);
+    text-wrap:balance;
+    min-height:1.4em;
+  }
+  .poster-rule{
+    height:2px;
+    background:linear-gradient(90deg,var(--brass),transparent);
+    margin:14px 0;
+  }
+  .poster-meta{
+    font-family:'Archivo',sans-serif;
+    font-size:12px;
+    color:var(--ink-soft);
+  }
+
+  .log-card{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:16px 18px;
+    max-height:220px;
+    overflow-y:auto;
+  }
+  .log-title{
+    font-family:'Archivo',sans-serif;
+    font-size:11px;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    margin-bottom:10px;
+  }
+  .log-entry{
+    font-family:'Archivo',sans-serif;
+    font-size:12.5px;
+    color:var(--ink);
+    padding:6px 0;
+    border-top:1px solid var(--line);
+    display:flex;
+    gap:8px;
+  }
+  .log-entry:first-child{ border-top:none; }
+  .log-time{ color:var(--ink-soft); flex:0 0 auto; }
+  .log-empty{
+    font-family:'Archivo',sans-serif;
+    font-size:12.5px;
+    color:var(--ink-soft);
+  }
+
+  .tools-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+  }
+  .icon-btn{
+    font-family:'Archivo',sans-serif;
+    font-weight:600;
+    font-size:12.5px;
+    padding:7px 12px;
+    border-radius:6px;
+    border:1px solid var(--line);
+    background:transparent;
+    color:var(--ink-soft);
+    cursor:pointer;
+  }
+  .icon-btn:hover{ border-color:var(--brass); color:var(--brass); }
+
+  .editor{
+    display:none;
+    flex-direction:column;
+    gap:10px;
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:16px 18px;
+  }
+  .editor.open{ display:flex; }
+  .editor-label{
+    font-family:'Archivo',sans-serif;
+    font-size:11px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+  }
+  textarea{
+    width:100%;
+    min-height:160px;
+    resize:vertical;
+    font-family:'Archivo',sans-serif;
+    font-size:13px;
+    line-height:1.5;
+    color:var(--ink);
+    background:var(--surface-2);
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:10px 12px;
+  }
+  .editor-actions{
+    display:flex;
+    gap:8px;
+    justify-content:flex-end;
+  }
+  .btn{
+    font-family:'Archivo',sans-serif;
+    font-weight:700;
+    font-size:13px;
+    padding:9px 16px;
+    border-radius:6px;
+    border:1px solid transparent;
+    cursor:pointer;
+  }
+  .btn-primary{ background:var(--teal); color:var(--seg-text); }
+  .btn-ghost{ background:transparent; border-color:var(--line); color:var(--ink-soft); }
+
+  footer.foot{
+    text-align:center;
+    font-family:'Archivo',sans-serif;
+    font-size:11.5px;
+    color:var(--ink-soft);
+    padding-top:6px;
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+  <header class="top">
+    <div class="brand-row">
+      <svg class="jolly-roger" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+        <circle cx="32" cy="26" r="16" fill="currentColor"/>
+        <ellipse cx="25" cy="24" rx="4" ry="5.5" fill="var(--surface)"/>
+        <ellipse cx="39" cy="24" rx="4" ry="5.5" fill="var(--surface)"/>
+        <path d="M27 33c2 2.5 8 2.5 10 0" stroke="var(--surface)" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+        <rect x="30" y="10" width="4" height="4" fill="currentColor" transform="rotate(45 32 12)"/>
+        <g stroke="currentColor" stroke-width="5" stroke-linecap="round">
+          <path d="M14 46L50 58"/>
+          <path d="M50 46L14 58"/>
+        </g>
+        <circle cx="14" cy="46" r="3" fill="currentColor"/>
+        <circle cx="50" cy="46" r="3" fill="currentColor"/>
+        <circle cx="14" cy="58" r="3" fill="currentColor"/>
+        <circle cx="50" cy="58" r="3" fill="currentColor"/>
+      </svg>
+      <div class="brand">One Piece Wheel</div>
+    </div>
+  </header>
+
+  <div class="mode-toggle" id="modeToggle">
+    <button class="mode-btn active" data-mode="normal" type="button">Normal Mode</button>
+    <button class="mode-btn" data-mode="create" type="button">Create Mode</button>
+  </div>
+
+  <nav class="chips" id="chips"></nav>
+
+  <div class="main-grid">
+    <div class="wheel-col">
+      <div class="create-progress" id="createProgress" hidden>Step 1 of 11 — Race</div>
+      <div class="wheel-shell" id="wheelShell">
+        <div class="wheel-pointer">
+          <svg viewBox="0 0 100 46" aria-hidden="true">
+            <ellipse cx="50" cy="34" rx="48" ry="10" fill="var(--brass-light)" stroke="var(--brass)" stroke-width="2"/>
+            <path d="M22 32 C22 12 78 12 78 32 L78 27 C78 20 22 20 22 27 Z" fill="var(--brass-light)" stroke="var(--brass)" stroke-width="2"/>
+            <rect x="24" y="23" width="52" height="7" fill="var(--crimson)"/>
+          </svg>
+          <div class="tip"></div>
+        </div>
+        <div class="wheel-disc" id="wheelDisc">
+          <canvas id="wheelCanvas"></canvas>
+        </div>
+        <button class="hub-btn" id="spinBtn">SPIN</button>
+      </div>
+      <div class="wheel-hint" id="wheelHint">12 entries loaded — click the wheel or the hub to spin</div>
+      <div class="legend-card">
+        <div class="legend-title">Everything on this wheel</div>
+        <div class="legend-grid" id="legendGrid"></div>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:16px;">
+      <div class="poster">
+        <div class="poster-eyebrow" id="posterCategory">Race</div>
+        <div class="poster-result" id="posterResult">Spin to reveal a result</div>
+        <div class="poster-rule"></div>
+        <div class="poster-meta" id="posterMeta">No spins yet</div>
+      </div>
+
+      <div class="tools-row">
+        <button class="icon-btn" id="editToggle">Edit this list</button>
+        <button class="icon-btn" id="resetBtn">Reset to default</button>
+      </div>
+
+      <div class="editor" id="editor">
+        <div class="editor-label">One entry per line</div>
+        <textarea id="editorArea" spellcheck="false"></textarea>
+        <div class="editor-actions">
+          <button class="btn btn-ghost" id="editorCancel">Cancel</button>
+          <button class="btn btn-primary" id="editorSave">Save list</button>
+        </div>
+      </div>
+
+      <div class="log-card">
+        <div class="log-title">Captain's Log</div>
+        <div id="logList"><div class="log-empty">Spins will appear here.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="foot">Wheel of Names not required — this whole thing spins on its own.</footer>
+</div>
+
+<div class="result-modal" id="resultModal">
+  <div class="result-modal-card">
+    <div class="result-modal-eyebrow" id="modalCategory">Race</div>
+    <div class="result-modal-text" id="modalText">You got: ...</div>
+    <button class="result-modal-close" id="modalClose">Spin again</button>
+  </div>
+</div>
+
+<div class="result-modal" id="characterModal">
+  <div class="result-modal-card wanted-card">
+    <div class="wanted-heading">WANTED</div>
+    <div class="wanted-sub">Dead or Alive</div>
+    <div class="wanted-portrait">
+      <svg viewBox="0 0 64 64" fill="none" aria-hidden="true">
+        <circle cx="32" cy="24" r="14" fill="currentColor"/>
+        <path d="M14 58c2-14 12-20 18-20s16 6 18 20" fill="currentColor"/>
+      </svg>
+    </div>
+    <div class="wanted-bounty" id="wantedBounty">Bounty: <span>000,000,000</span> Berries</div>
+    <div class="character-list" id="characterList"></div>
+    <div class="character-actions">
+      <button class="result-modal-close" id="characterAgain">Create Another</button>
+      <button class="result-modal-close" id="characterNormal" style="background:var(--teal);">Back to Normal Mode</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var DEFAULT_CATEGORIES = {
+    "Age": ["0-5","5-15","15-25","25-50","50-75","75-100","100-800"],
+    "Race": ["Humans","Fish-Men","Merfolk","Giants","Ancient Giants","Minks","Skypieans","Lunarians","Cyborgs","Hybrids","Tontatta","Buccaneers","Germa Humans"],
+    "Affiliation": ["Pirate","Marine","Revolutionary Army","World Government","Bounty Hunter","Warlord","Cipher Pol","Civilian","Yonko Crew Member","Emperor of the Sea"],
+    "Sword + DF": ["Sword + DF","More Than 1 DF","Swordsman","Yes","No"],
+    "Weapon Mastery": ["Beginner 🌱","Average ⚔️","Skilled 🔥","Advanced 💪","Master 🎓","Zoro Level 🗡️","Katakuri Level 🍡","Mihawk Level 🦅","Shanks Level 🔴","Rayleigh Level 🥃","Roger Level 👑"],
+    "Armament Haki": ["Beginner 🌱","Average ⚔️","Skilled 🔥","Advanced 💪","Master 🎓","Katakuri Level 🍡","Luffy Level 🔴","Shanks Level 🌊","Rayleigh Level 🥃","World's Strongest 🌍"],
+    "Observation Haki": ["Beginner 🌱","Average ⚔️","Skilled 🔥","Advanced 💪","Master 🎓","Katakuri Level 🍡","Mihawk Level 🦅","Shanks Level 🔴","World's Strongest 🌍"],
+    "Conqueror's Haki": ["Latent 🌱","Basic ⚔️","Controlled 🔥","Advanced 💪","Master 🎓","Shanks Level 🔴","Roger Level 👑","God Level ⚡","Imu Level 🌑","Joy Boy Level ☀️"],
+    "Strength": ["Beginner 🌱","Average ⚔️","Skilled 🔥","Advanced 💪","Master 🎓","Katakuri Level 🍡","Kaido Level 🐉","Big Mom Level 🍰","Whitebeard Level 🌋","Prime Garp Level 👊","Rocks Level ☠️","Roger Level 👑","Imu Level 🌑","God Level ⚡"],
+    "Durability": ["Beginner 🌱","Average ⚔️","Skilled 🔥","Advanced 💪","Master 🎓","Katakuri Level 🍡","Kaido Level 🐉","Whitebeard Level 🌋","Big Mom Level 🍰","Roger Level 👑","Imu Level 🌑","God Level ⚡"],
+    "Speed": ["Beginner 🌱","Average ⚔️","Skilled 🔥","Advanced 💪","Master 🎓","Katakuri Level 🍡","CP0 Level 🕴️","Kizaru Level ⚡","Shanks Level 🔴","Gear 5 Luffy Level ☀️","World's Fastest 🌍"],
+    "Intelligence": ["Beginner 🌱","Average ⚔️","Skilled 🔥","Advanced 💪","Master 🎓","Genius 💡","Robin Level 📚","Law Level 🩺","Sengoku Level ⚖️","Vega Punk Level 🔬","World's Smartest 🌍"],
+    "Devil Fruit Types": ["Paramecia","Zoan","Ancient Zoan","Mythical Zoan","Logia","Special Paramecia"],
+    "Types of Haki": ["Armament Haki (Busoshoku)","Observation Haki (Kenbunshoku)","Conqueror's Haki (Haoshoku)"],
+    "Yes / No": ["Yes","No"],
+    "Devil Fruits": ["Hito Hito no Mi (Model: Nika)","Mera Mera no Mi (Model: Fire)","Hie Hie no Mi (Model: Ice)","Suna Suna no Mi (Model: Sand)","Yami Yami no Mi (Model: Darkness)","Pika Pika no Mi (Model: Light)","Goro Goro no Mi (Model: Lightning)","Moku Moku no Mi (Model: Smoke)","Numa Numa no Mi (Model: Swamp)","Gasu Gasu no Mi (Model: Gas)","Magu Magu no Mi (Model: Magma)","Ryu Ryu no Mi (Model: Allosaurus)","Ryu Ryu no Mi (Model: Spinosaurus)","Ryu Ryu no Mi (Model: Pteranodon)","Ryu Ryu no Mi (Model: Brachiosaurus)","Ryu Ryu no Mi (Model: Pachycephalosaurus)","Zou Zou no Mi (Model: Mammoth)","Uo Uo no Mi (Model: Seiryu)","Inu Inu no Mi (Model: Okuchi no Makami)","Tori Tori no Mi (Model: Phoenix)","Hito Hito no Mi (Model: Daibutsu)","Hana Hana no Mi (Model: Flower)","Bara Bara no Mi (Model: Chop-Chop)","Sube Sube no Mi (Model: Slip)","Bomu Bomu no Mi (Model: Bomb)","Doru Doru no Mi (Model: Wax)","Baku Baku no Mi (Model: Munch)","Mane Mane no Mi (Model: Copy)","Toge Toge no Mi (Model: Spike)","Ori Ori no Mi (Model: Cage)","Noro Noro no Mi (Model: Slow)","Doa Doa no Mi (Model: Door)","Awa Awa no Mi (Model: Bubble)","Supa Supa no Mi (Model: Blade)","Bane Bane no Mi (Model: Spring)","Nikyu Nikyu no Mi (Model: Paw)","Horo Horo no Mi (Model: Ghost)","Suke Suke no Mi (Model: Invisible)","Yomi Yomi no Mi (Model: Revive)","Kage Kage no Mi (Model: Shadow)","Ito Ito no Mi (Model: String)","Hobi Hobi no Mi (Model: Toy)","Doku Doku no Mi (Model: Poison)","Chiyu Chiyu no Mi (Model: Heal)","Buki Buki no Mi (Model: Weapon)","Kira Kira no Mi (Model: Diamond)","Bari Bari no Mi (Model: Barrier)","Nui Nui no Mi (Model: Stitch)","Giro Giro no Mi (Model: X-Ray)","Mero Mero no Mi (Model: Love)","Mochi Mochi no Mi (Model: Mochi)","Soru Soru no Mi (Model: Soul)","Ope Ope no Mi (Model: Surgery)","Zushi Zushi no Mi (Model: Gravity)","Fuwa Fuwa no Mi (Model: Float)","Gura Gura no Mi (Model: Quake)","Pero Pero no Mi (Model: Candy)","Bisu Bisu no Mi (Model: Biscuit)","Memo Memo no Mi (Model: Memory)"]
+  };
+
+  var STORAGE_KEY = "strawhat-randomizer-v1";
+  var CATEGORY_NAMES = Object.keys(DEFAULT_CATEGORIES);
+  var SEGMENT_TOKENS = ["--seg-a","--seg-b","--seg-c","--seg-d","--seg-e","--seg-f"];
+  var CREATE_SEQUENCE = ["Age","Race","Affiliation","Devil Fruits","Weapon Mastery","Armament Haki","Observation Haki","Conqueror's Haki","Strength","Durability","Speed","Intelligence"];
+
+  var state = {
+    lists: {},
+    current: CATEGORY_NAMES[0],
+    rotation: 0,
+    spinning: false,
+    log: [],
+    mode: "normal",
+    createStep: 0,
+    createResults: {}
+  };
+
+  function loadSaved(){
+    try{
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if(raw){
+        var parsed = JSON.parse(raw);
+        if(parsed && typeof parsed === "object") return parsed;
+      }
+    }catch(e){}
+    return {};
+  }
+
+  function persist(){
+    try{
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state.lists));
+    }catch(e){}
+  }
+
+  (function init(){
+    var saved = loadSaved();
+    CATEGORY_NAMES.forEach(function(name){
+      var custom = saved[name];
+      state.lists[name] = (Array.isArray(custom) && custom.length >= 2) ? custom : DEFAULT_CATEGORIES[name].slice();
+    });
+  })();
+
+  var chipsEl = document.getElementById("chips");
+  var canvas = document.getElementById("wheelCanvas");
+  var ctx = canvas.getContext("2d");
+  var disc = document.getElementById("wheelDisc");
+  var shell = document.getElementById("wheelShell");
+  var spinBtn = document.getElementById("spinBtn");
+  var wheelHint = document.getElementById("wheelHint");
+  var posterCategory = document.getElementById("posterCategory");
+  var posterResult = document.getElementById("posterResult");
+  var posterMeta = document.getElementById("posterMeta");
+  var logList = document.getElementById("logList");
+  var editToggle = document.getElementById("editToggle");
+  var resetBtn = document.getElementById("resetBtn");
+  var editor = document.getElementById("editor");
+  var editorArea = document.getElementById("editorArea");
+  var editorSave = document.getElementById("editorSave");
+  var editorCancel = document.getElementById("editorCancel");
+  var legendGrid = document.getElementById("legendGrid");
+  var resultModal = document.getElementById("resultModal");
+  var modalCategory = document.getElementById("modalCategory");
+  var modalText = document.getElementById("modalText");
+  var modalClose = document.getElementById("modalClose");
+  var modeToggle = document.getElementById("modeToggle");
+  var createProgress = document.getElementById("createProgress");
+  var characterModal = document.getElementById("characterModal");
+  var characterList = document.getElementById("characterList");
+  var wantedBounty = document.getElementById("wantedBounty");
+  var characterAgain = document.getElementById("characterAgain");
+  var characterNormal = document.getElementById("characterNormal");
+  var modalOnClose = null;
+
+  function currentList(){
+    return state.lists[state.current];
+  }
+
+  function readCssVar(name){
+    return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+  }
+
+  function buildChips(){
+    chipsEl.innerHTML = "";
+    CATEGORY_NAMES.forEach(function(name){
+      var b = document.createElement("button");
+      b.className = "chip" + (name === state.current ? " active" : "");
+      b.type = "button";
+      b.textContent = name;
+      b.addEventListener("click", function(){
+        if(state.spinning) return;
+        state.current = name;
+        buildChips();
+        drawWheel();
+        updateHint();
+        renderLegend();
+        posterCategory.textContent = name;
+      });
+      chipsEl.appendChild(b);
+    });
+  }
+
+  function updateHint(){
+    wheelHint.textContent = currentList().length + " entries loaded — click the wheel or the hub to spin";
+  }
+
+  function renderLegend(){
+    legendGrid.innerHTML = "";
+    currentList().forEach(function(item){
+      var el = document.createElement("div");
+      el.className = "legend-item";
+      el.textContent = item;
+      legendGrid.appendChild(el);
+    });
+  }
+
+  function showResultModal(category, result, buttonLabel, onClose){
+    modalCategory.textContent = category;
+    modalText.textContent = "You got: " + result;
+    modalClose.textContent = buttonLabel || "Spin again";
+    modalOnClose = onClose || null;
+    resultModal.classList.add("show");
+  }
+
+  function hideResultModal(){
+    resultModal.classList.remove("show");
+    if(modalOnClose){
+      var fn = modalOnClose;
+      modalOnClose = null;
+      fn();
+    }
+  }
+
+  modalClose.addEventListener("click", function(e){
+    e.stopPropagation();
+    hideResultModal();
+  });
+  resultModal.addEventListener("click", function(e){
+    if(e.target === resultModal) hideResultModal();
+  });
+
+  function setMode(mode){
+    state.mode = mode;
+    var buttons = modeToggle.querySelectorAll(".mode-btn");
+    buttons.forEach(function(b){
+      b.classList.toggle("active", b.getAttribute("data-mode") === mode);
+    });
+    if(mode === "create"){
+      chipsEl.hidden = true;
+      createProgress.hidden = false;
+      startCreateFlow();
+    } else {
+      chipsEl.hidden = false;
+      createProgress.hidden = true;
+      state.current = CATEGORY_NAMES[0];
+      buildChips();
+      drawWheel();
+      updateHint();
+      renderLegend();
+      posterCategory.textContent = state.current;
+      posterResult.textContent = "Spin to reveal a result";
+      posterMeta.textContent = "Normal mode";
+    }
+  }
+
+  function startCreateFlow(){
+    state.createStep = 0;
+    state.createResults = {};
+    loadCreateStep();
+  }
+
+  function loadCreateStep(){
+    var name = CREATE_SEQUENCE[state.createStep];
+    state.current = name;
+    drawWheel();
+    updateHint();
+    renderLegend();
+    posterCategory.textContent = name;
+    posterResult.textContent = "Spin to roll your " + name;
+    posterMeta.textContent = "Character build in progress";
+    createProgress.textContent = "Step " + (state.createStep + 1) + " of " + CREATE_SEQUENCE.length + " — " + name;
+  }
+
+  function randomBounty(){
+    var n = 5000000 + Math.floor(Math.random() * 4995000000);
+    return n.toLocaleString("en-US").replace(/,/g, ",");
+  }
+
+  function showCharacterSheet(){
+    wantedBounty.innerHTML = "Bounty: <span>" + randomBounty() + "</span> Berries";
+    characterList.innerHTML = "";
+    CREATE_SEQUENCE.forEach(function(cat){
+      var row = document.createElement("div");
+      row.className = "character-row";
+      var label = document.createElement("span");
+      label.className = "character-label";
+      label.textContent = cat;
+      var value = document.createElement("span");
+      value.className = "character-value";
+      value.textContent = state.createResults[cat] || "—";
+      row.appendChild(label);
+      row.appendChild(value);
+      characterList.appendChild(row);
+    });
+    characterModal.classList.add("show");
+  }
+
+  modeToggle.addEventListener("click", function(e){
+    var btn = e.target.closest(".mode-btn");
+    if(!btn || state.spinning) return;
+    var mode = btn.getAttribute("data-mode");
+    if(mode !== state.mode) setMode(mode);
+  });
+
+  characterAgain.addEventListener("click", function(){
+    characterModal.classList.remove("show");
+    startCreateFlow();
+  });
+  characterNormal.addEventListener("click", function(){
+    characterModal.classList.remove("show");
+    setMode("normal");
+  });
+
+  function fitFontSize(ctx, text, maxWidth, baseSize, minSize){
+    var floor = minSize || 9;
+    var size = baseSize;
+    ctx.font = "600 " + size + "px Archivo, sans-serif";
+    while(size > floor && ctx.measureText(text).width > maxWidth){
+      size -= 1;
+      ctx.font = "600 " + size + "px Archivo, sans-serif";
+    }
+    return size;
+  }
+
+  function wheelLabel(text){
+    return text.replace(/\s*\(Model:[^)]*\)\s*$/i, "");
+  }
+
+  function layoutLabel(ctx, text, maxWidth, baseSize, minSize){
+    var size = fitFontSize(ctx, text, maxWidth, baseSize, minSize);
+    ctx.font = "600 " + size + "px Archivo, sans-serif";
+    if(ctx.measureText(text).width <= maxWidth){
+      return { lines: [text], size: size };
+    }
+    var words = text.split(" ");
+    if(words.length < 2){
+      return { lines: [text], size: size };
+    }
+    var bestSplit = 1, bestMax = Infinity;
+    for(var s = 1; s < words.length; s++){
+      var l1 = words.slice(0, s).join(" ");
+      var l2 = words.slice(s).join(" ");
+      var m = Math.max(ctx.measureText(l1).width, ctx.measureText(l2).width);
+      if(m < bestMax){ bestMax = m; bestSplit = s; }
+    }
+    var line1 = words.slice(0, bestSplit).join(" ");
+    var line2 = words.slice(bestSplit).join(" ");
+    var twoLineSize = size;
+    ctx.font = "600 " + twoLineSize + "px Archivo, sans-serif";
+    while(twoLineSize > minSize && (ctx.measureText(line1).width > maxWidth || ctx.measureText(line2).width > maxWidth)){
+      twoLineSize -= 1;
+      ctx.font = "600 " + twoLineSize + "px Archivo, sans-serif";
+    }
+    return { lines: [line1, line2], size: twoLineSize };
+  }
+
+  function drawWheel(){
+    var size = canvas.clientWidth;
+    var dpr = window.devicePixelRatio || 1;
+    canvas.width = Math.round(size * dpr);
+    canvas.height = Math.round(size * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, size, size);
+
+    var list = currentList();
+    var n = list.length;
+    var cx = size / 2, cy = size / 2;
+    var radius = size / 2 - 4;
+    var segAngle = (Math.PI * 2) / n;
+    var segColors = SEGMENT_TOKENS.map(readCssVar);
+    var segText = readCssVar("--seg-text");
+    var lineColor = readCssVar("--surface");
+
+    var baseFont = n <= 6 ? 20 : n <= 10 ? 18 : n <= 16 ? 16 : n <= 24 ? 14 : n <= 40 ? 13 : 12;
+    var refRadius = radius * 0.62;
+    var maxTextWidth = 2 * refRadius * Math.sin(segAngle / 2) * 0.96;
+
+    for(var i = 0; i < n; i++){
+      var start = -Math.PI / 2 + i * segAngle;
+      var end = start + segAngle;
+
+      ctx.beginPath();
+      ctx.moveTo(cx, cy);
+      ctx.arc(cx, cy, radius, start, end);
+      ctx.closePath();
+      ctx.fillStyle = segColors[i % segColors.length];
+      ctx.fill();
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = lineColor;
+      ctx.stroke();
+
+      ctx.save();
+      ctx.translate(cx, cy);
+      ctx.rotate(start + segAngle / 2);
+      ctx.textBaseline = "middle";
+      ctx.fillStyle = segText;
+      var isDevilFruits = state.current === "Devil Fruits";
+      var rawLabel = wheelLabel(list[i]);
+      var textX = radius * 0.66;
+      ctx.textAlign = "center";
+      var floorSize = isDevilFruits ? 9 : 12;
+      var layout = layoutLabel(ctx, rawLabel, maxTextWidth, baseFont, floorSize);
+      ctx.font = "600 " + layout.size + "px Archivo, sans-serif";
+      if(layout.lines.length === 1){
+        ctx.fillText(layout.lines[0], textX, 0);
+      } else {
+        var lh = layout.size * 1.12;
+        ctx.fillText(layout.lines[0], textX, -lh / 2);
+        ctx.fillText(layout.lines[1], textX, lh / 2);
+      }
+      ctx.restore();
+    }
+
+    ctx.beginPath();
+    ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+    ctx.lineWidth = 6;
+    ctx.strokeStyle = readCssVar("--brass");
+    ctx.stroke();
+
+    var handleCount = 8;
+    var handleColor = readCssVar("--brass");
+    var handleLight = readCssVar("--brass-light");
+    for(var h = 0; h < handleCount; h++){
+      var a = (Math.PI * 2 / handleCount) * h - Math.PI / 2;
+      var x1 = cx + Math.cos(a) * radius;
+      var y1 = cy + Math.sin(a) * radius;
+      var x2 = cx + Math.cos(a) * (radius + size * 0.045);
+      var y2 = cy + Math.sin(a) * (radius + size * 0.045);
+      ctx.beginPath();
+      ctx.moveTo(x1, y1);
+      ctx.lineTo(x2, y2);
+      ctx.lineWidth = size * 0.028;
+      ctx.strokeStyle = handleColor;
+      ctx.lineCap = "round";
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(x2, y2, size * 0.024, 0, Math.PI * 2);
+      ctx.fillStyle = handleLight;
+      ctx.fill();
+    }
+
+    ctx.beginPath();
+    ctx.arc(cx, cy, size * 0.16, 0, Math.PI * 2);
+    ctx.fillStyle = readCssVar("--surface");
+    ctx.fill();
+    ctx.lineWidth = 3;
+    ctx.strokeStyle = readCssVar("--brass");
+    ctx.stroke();
+  }
+
+  function formatTime(d){
+    var hh = String(d.getHours()).padStart(2, "0");
+    var mm = String(d.getMinutes()).padStart(2, "0");
+    var ss = String(d.getSeconds()).padStart(2, "0");
+    return hh + ":" + mm + ":" + ss;
+  }
+
+  function renderLog(){
+    if(state.log.length === 0){
+      logList.innerHTML = '<div class="log-empty">Spins will appear here.</div>';
+      return;
+    }
+    logList.innerHTML = "";
+    state.log.slice(0, 30).forEach(function(entry){
+      var row = document.createElement("div");
+      row.className = "log-entry";
+      var time = document.createElement("span");
+      time.className = "log-time";
+      time.textContent = entry.time;
+      var text = document.createElement("span");
+      text.textContent = entry.category + " — " + entry.result;
+      row.appendChild(time);
+      row.appendChild(text);
+      logList.appendChild(row);
+    });
+  }
+
+  function spin(){
+    if(state.spinning) return;
+    var list = currentList();
+    if(list.length < 2) return;
+
+    state.spinning = true;
+    spinBtn.setAttribute("disabled", "true");
+
+    var n = list.length;
+    var segAngleDeg = 360 / n;
+    var winnerIndex = Math.floor(Math.random() * n);
+    var centerDeg = winnerIndex * segAngleDeg + segAngleDeg / 2;
+    var desiredMod = (360 - centerDeg + 360) % 360;
+    var currentMod = ((state.rotation % 360) + 360) % 360;
+    var delta = (desiredMod - currentMod + 360) % 360;
+    var extraSpins = 5 + Math.floor(Math.random() * 2);
+    var newRotation = state.rotation + extraSpins * 360 + delta;
+
+    state.rotation = newRotation;
+    disc.style.transform = "rotate(" + newRotation + "deg)";
+
+    window.setTimeout(function(){
+      var result = list[winnerIndex];
+      var category = state.current;
+      posterResult.textContent = "You got: " + result;
+      posterCategory.textContent = category;
+      var now = new Date();
+      posterMeta.textContent = "Landed at " + formatTime(now);
+      state.log.unshift({ time: formatTime(now), category: category, result: result });
+      renderLog();
+      state.spinning = false;
+      spinBtn.removeAttribute("disabled");
+
+      if(state.mode === "create"){
+        state.createResults[category] = result;
+        var isLast = state.createStep >= CREATE_SEQUENCE.length - 1;
+        showResultModal(category, result, isLast ? "See Your Character" : "Next", function(){
+          if(isLast){
+            showCharacterSheet();
+          } else {
+            state.createStep += 1;
+            loadCreateStep();
+          }
+        });
+      } else {
+        showResultModal(category, result, "Spin again", null);
+      }
+    }, 4300);
+  }
+
+  shell.addEventListener("click", function(e){
+    spin();
+  });
+
+  editToggle.addEventListener("click", function(){
+    editorArea.value = currentList().join("\n");
+    editor.classList.add("open");
+  });
+
+  editorCancel.addEventListener("click", function(){
+    editor.classList.remove("open");
+  });
+
+  editorSave.addEventListener("click", function(){
+    var lines = editorArea.value.split("\n").map(function(s){ return s.trim(); }).filter(Boolean);
+    if(lines.length < 2){
+      editorArea.style.borderColor = readCssVar("--crimson");
+      return;
+    }
+    state.lists[state.current] = lines;
+    persist();
+    editor.classList.remove("open");
+    drawWheel();
+    updateHint();
+    renderLegend();
+    posterResult.textContent = "Spin to reveal a result";
+    posterMeta.textContent = "List updated";
+  });
+
+  resetBtn.addEventListener("click", function(){
+    state.lists[state.current] = DEFAULT_CATEGORIES[state.current].slice();
+    persist();
+    drawWheel();
+    updateHint();
+    renderLegend();
+    posterResult.textContent = "Spin to reveal a result";
+    posterMeta.textContent = "Restored default list";
+  });
+
+  window.addEventListener("resize", function(){
+    if(!state.spinning) drawWheel();
+  });
+
+  buildChips();
+  posterCategory.textContent = state.current;
+  updateHint();
+  renderLegend();
+  requestAnimationFrame(drawWheel);
+
+  if("serviceWorker" in navigator){
+    window.addEventListener("load", function(){
+      navigator.serviceWorker.register("sw.js").catch(function(){});
+    });
+  }
+})();
+</script>
+</body>
+</html>
