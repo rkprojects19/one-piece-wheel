@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>One Piece Wheel</title>
-<meta name="description" content="A pirate-helm spin wheel for generating random One Piece character traits — race, Devil Fruit, Haki, and stats.">
-<meta name="theme-color" content="#c8891a">
+<title>YT Wheel</title>
+<meta name="description" content="A spin wheel for generating random character traits for your videos.">
+<meta name="theme-color" content="#e0263f">
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="icons/icon-192.png">
 <link rel="apple-touch-icon" href="icons/icon-192.png">
@@ -13,83 +13,81 @@
   @import url('https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&display=swap');
 
   :root{
-    --ink:#1c1206;
-    --ink-soft:#5e4a28;
-    --bg:#f4e4bd;
-    --surface:#fffaee;
-    --surface-2:#ecd99e;
-    --brass:#c8891a;
-    --brass-light:#f0b429;
-    --teal:#1a5a9e;
-    --teal-light:#2f7fce;
-    --crimson:#a3241f;
-    --crimson-light:#cf3a2f;
-    --line:rgba(28,18,6,0.20);
-    --shadow:rgba(28,18,6,0.32);
-    --seg-a:#1a5a9e;
-    --seg-b:#c8891a;
-    --seg-c:#a3241f;
-    --seg-d:#241a10;
-    --seg-e:#2f7fce;
-    --seg-f:#f0b429;
-    --seg-text:#fffaee;
+    --ink:#15151a;
+    --ink-soft:#5a5a66;
+    --bg:#f4f4f7;
+    --surface:#ffffff;
+    --surface-2:#e9e9ef;
+    --brass:#e0263f;
+    --brass-light:#ff4d61;
+    --teal:#23272f;
+    --teal-light:#3a4150;
+    --crimson:#c81e37;
+    --crimson-light:#e14a60;
+    --line:rgba(21,21,26,0.14);
+    --shadow:rgba(21,21,26,0.28);
+    --seg-a:#23272f;
+    --seg-b:#e0263f;
+    --seg-c:#d98a1f;
+    --seg-d:#15151a;
+    --seg-e:#2f6fa3;
+    --seg-f:#ff4d61;
+    --seg-text:#ffffff;
     color-scheme:light;
   }
   @media (prefers-color-scheme: dark){
     :root:not([data-theme="light"]){
-      --ink:#f3e6c4;
-      --ink-soft:#c2a76e;
-      --bg:#081824;
-      --surface:#0f2534;
-      --surface-2:#153348;
-      --brass:#f0b429;
-      --brass-light:#ffd166;
-      --teal:#3f8fd6;
-      --teal-light:#68acea;
-      --crimson:#e2564f;
-      --crimson-light:#ef7a72;
-      --line:rgba(243,230,196,0.18);
+      --ink:#f1f1f5;
+      --ink-soft:#b7b7c2;
+      --bg:#0f0f13;
+      --surface:#1a1a20;
+      --surface-2:#24242c;
+      --brass:#ff4757;
+      --brass-light:#ff6b7a;
+      --teal:#8a93a6;
+      --teal-light:#aab2c2;
+      --crimson:#ff5468;
+      --crimson-light:#ff7c8c;
+      --line:rgba(241,241,245,0.16);
       --shadow:rgba(0,0,0,0.55);
-      --seg-a:#123a56;
-      --seg-b:#5c4212;
-      --seg-c:#5c211c;
-      --seg-d:#140d06;
-      --seg-e:#184a6e;
-      --seg-f:#7a5c16;
-      --seg-text:#f3e6c4;
+      --seg-a:#30343c;
+      --seg-b:#b81f33;
+      --seg-c:#a66a16;
+      --seg-d:#101013;
+      --seg-e:#24506e;
+      --seg-f:#c93a4c;
+      --seg-text:#f1f1f5;
       color-scheme:dark;
     }
   }
   :root[data-theme="dark"]{
-    --ink:#f3e6c4;
-    --ink-soft:#c2a76e;
-    --bg:#081824;
-    --surface:#0f2534;
-    --surface-2:#153348;
-    --brass:#f0b429;
-    --brass-light:#ffd166;
-    --teal:#3f8fd6;
-    --teal-light:#68acea;
-    --crimson:#e2564f;
-    --crimson-light:#ef7a72;
-    --line:rgba(243,230,196,0.18);
+    --ink:#f1f1f5;
+    --ink-soft:#b7b7c2;
+    --bg:#0f0f13;
+    --surface:#1a1a20;
+    --surface-2:#24242c;
+    --brass:#ff4757;
+    --brass-light:#ff6b7a;
+    --teal:#8a93a6;
+    --teal-light:#aab2c2;
+    --crimson:#ff5468;
+    --crimson-light:#ff7c8c;
+    --line:rgba(241,241,245,0.16);
     --shadow:rgba(0,0,0,0.55);
-    --seg-a:#123a56;
-    --seg-b:#5c4212;
-    --seg-c:#5c211c;
-    --seg-d:#140d06;
-    --seg-e:#184a6e;
-    --seg-f:#7a5c16;
-    --seg-text:#f3e6c4;
+    --seg-a:#30343c;
+    --seg-b:#b81f33;
+    --seg-c:#a66a16;
+    --seg-d:#101013;
+    --seg-e:#24506e;
+    --seg-f:#c93a4c;
+    --seg-text:#f1f1f5;
     color-scheme:dark;
   }
 
   *{box-sizing:border-box;}
   html,body{ margin:0; padding:0; }
   body{
-    background:
-      repeating-linear-gradient(135deg, var(--surface-2) 0px, var(--surface-2) 1.5px, transparent 1.5px, transparent 34px),
-      var(--bg);
+    background: var(--bg);
     color:var(--ink);
     font-family:'Archivo',system-ui,sans-serif;
     padding:28px 16px 48px;
@@ -105,7 +103,6 @@
     flex-direction:column;
     gap:22px;
   }
-
   header.top{
     display:flex;
     flex-direction:column;
@@ -118,10 +115,10 @@
     align-items:center;
     gap:12px;
   }
-  .jolly-roger{
+  .app-logo{
     width:38px;
     height:38px;
-    color:var(--ink);
+    color:var(--brass);
     flex:0 0 auto;
   }
   .brand{
@@ -132,11 +129,16 @@
     letter-spacing:-0.01em;
     text-wrap:balance;
   }
+  .toggle-row{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    flex-wrap:wrap;
+  }
   .mode-toggle{
     display:flex;
     justify-content:center;
     gap:0;
-    align-self:center;
     border:2px solid var(--brass);
     border-radius:999px;
     padding:3px;
@@ -157,7 +159,10 @@
     background:var(--brass);
     color:var(--seg-text);
   }
-
+  .mode-btn[disabled]{
+    opacity:0.4;
+    cursor:default;
+  }
   .create-progress{
     font-family:'Archivo',sans-serif;
     font-weight:700;
@@ -166,7 +171,6 @@
     text-align:center;
     letter-spacing:0.02em;
   }
-
   .wanted-card{
     background:var(--surface);
     border:5px double var(--ink);
@@ -256,7 +260,6 @@
     margin-top:22px;
     flex-wrap:wrap;
   }
-
   .chips{
     display:flex;
     gap:8px;
@@ -288,7 +291,6 @@
     outline:2px solid var(--teal-light);
     outline-offset:2px;
   }
-
   .main-grid{
     display:grid;
     grid-template-columns:minmax(0,1fr) minmax(280px,360px);
@@ -298,7 +300,6 @@
   @media (max-width:760px){
     .main-grid{ grid-template-columns:1fr; }
   }
-
   .wheel-col{
     display:flex;
     flex-direction:column;
@@ -310,28 +311,18 @@
     width:min(90vw,480px);
     aspect-ratio:1/1;
     cursor:pointer;
-    margin-top:36px;
+    margin-top:30px;
   }
   .wheel-pointer{
     position:absolute;
-    top:-34px;
+    top:-26px;
     left:50%;
     transform:translateX(-50%);
-    width:56px;
+    width:42px;
     z-index:5;
     filter:drop-shadow(0 3px 3px var(--shadow));
   }
   .wheel-pointer svg{ display:block; width:100%; height:auto; }
-  .wheel-pointer .tip{
-    position:absolute;
-    left:50%;
-    bottom:-14px;
-    transform:translateX(-50%);
-    width:0; height:0;
-    border-left:9px solid transparent;
-    border-right:9px solid transparent;
-    border-top:16px solid var(--crimson);
-  }
   .wheel-disc{
     width:100%;
     height:100%;
@@ -365,14 +356,12 @@
   }
   .hub-btn:active{ transform:translate(-50%,-50%) scale(0.96); }
   .hub-btn[disabled]{ opacity:0.7; cursor:default; }
-
   .wheel-hint{
     font-family:'Archivo',sans-serif;
     font-size:12px;
     color:var(--ink-soft);
     text-align:center;
   }
-
   .legend-card{
     width:100%;
     max-width:420px;
@@ -403,11 +392,10 @@
     color:var(--ink);
     line-height:1.4;
   }
-
   .result-modal{
     position:fixed;
     inset:0;
-    background:rgba(10,8,2,0.6);
+    background:rgba(10,10,14,0.6);
     display:flex;
     align-items:center;
     justify-content:center;
@@ -465,7 +453,6 @@
     color:var(--seg-text);
     cursor:pointer;
   }
-
   .poster{
     background:var(--surface);
     border:3px double var(--brass);
@@ -512,7 +499,6 @@
     font-size:12px;
     color:var(--ink-soft);
   }
-
   .log-card{
     background:var(--surface);
     border:1px solid var(--line);
@@ -545,7 +531,6 @@
     font-size:12.5px;
     color:var(--ink-soft);
   }
-
   .tools-row{
     display:flex;
     justify-content:space-between;
@@ -564,7 +549,6 @@
     cursor:pointer;
   }
   .icon-btn:hover{ border-color:var(--brass); color:var(--brass); }
-
   .editor{
     display:none;
     flex-direction:column;
@@ -611,7 +595,6 @@
   }
   .btn-primary{ background:var(--teal); color:var(--seg-text); }
   .btn-ghost{ background:transparent; border-color:var(--line); color:var(--ink-soft); }
-
   footer.foot{
     text-align:center;
     font-family:'Archivo',sans-serif;
@@ -626,43 +609,35 @@
 <div class="page">
   <header class="top">
     <div class="brand-row">
-      <svg class="jolly-roger" viewBox="0 0 64 64" fill="none" aria-hidden="true">
-        <circle cx="32" cy="26" r="16" fill="currentColor"/>
-        <ellipse cx="25" cy="24" rx="4" ry="5.5" fill="var(--surface)"/>
-        <ellipse cx="39" cy="24" rx="4" ry="5.5" fill="var(--surface)"/>
-        <path d="M27 33c2 2.5 8 2.5 10 0" stroke="var(--surface)" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-        <rect x="30" y="10" width="4" height="4" fill="currentColor" transform="rotate(45 32 12)"/>
-        <g stroke="currentColor" stroke-width="5" stroke-linecap="round">
-          <path d="M14 46L50 58"/>
-          <path d="M50 46L14 58"/>
-        </g>
-        <circle cx="14" cy="46" r="3" fill="currentColor"/>
-        <circle cx="50" cy="46" r="3" fill="currentColor"/>
-        <circle cx="14" cy="58" r="3" fill="currentColor"/>
-        <circle cx="50" cy="58" r="3" fill="currentColor"/>
+      <svg class="app-logo" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+        <circle cx="32" cy="32" r="27" stroke="currentColor" stroke-width="4"/>
+        <path d="M26 20 L47 32 L26 44 Z" fill="currentColor"/>
       </svg>
-      <div class="brand">One Piece Wheel</div>
+      <div class="brand">YT Wheel</div>
     </div>
   </header>
 
-  <div class="mode-toggle" id="modeToggle">
-    <button class="mode-btn active" data-mode="normal" type="button">Normal Mode</button>
-    <button class="mode-btn" data-mode="create" type="button">Create Mode</button>
+  <div class="toggle-row">
+    <div class="mode-toggle" id="franchiseToggle">
+      <button class="mode-btn active" data-franchise="One Piece" type="button">One Piece</button>
+      <button class="mode-btn" data-franchise="JJK" type="button">JJK</button>
+    </div>
+    <div class="mode-toggle" id="modeToggle">
+      <button class="mode-btn active" data-mode="normal" type="button">Normal Mode</button>
+      <button class="mode-btn" data-mode="create" type="button">Create Mode</button>
+    </div>
   </div>
 
   <nav class="chips" id="chips"></nav>
-
   <div class="main-grid">
     <div class="wheel-col">
       <div class="create-progress" id="createProgress" hidden>Step 1 of 11 — Race</div>
       <div class="wheel-shell" id="wheelShell">
         <div class="wheel-pointer">
-          <svg viewBox="0 0 100 46" aria-hidden="true">
-            <ellipse cx="50" cy="34" rx="48" ry="10" fill="var(--brass-light)" stroke="var(--brass)" stroke-width="2"/>
-            <path d="M22 32 C22 12 78 12 78 32 L78 27 C78 20 22 20 22 27 Z" fill="var(--brass-light)" stroke="var(--brass)" stroke-width="2"/>
-            <rect x="24" y="23" width="52" height="7" fill="var(--crimson)"/>
+          <svg viewBox="0 0 40 48" aria-hidden="true">
+            <path d="M20 46 L4 16 A16 16 0 1 1 36 16 Z" fill="var(--brass-light)" stroke="var(--brass)" stroke-width="2"/>
+            <circle cx="20" cy="16" r="6" fill="var(--surface)"/>
           </svg>
-          <div class="tip"></div>
         </div>
         <div class="wheel-disc" id="wheelDisc">
           <canvas id="wheelCanvas"></canvas>
@@ -699,13 +674,13 @@
       </div>
 
       <div class="log-card">
-        <div class="log-title">Captain's Log</div>
+        <div class="log-title">Spin Log</div>
         <div id="logList"><div class="log-empty">Spins will appear here.</div></div>
       </div>
     </div>
   </div>
 
-  <footer class="foot">Wheel of Names not required — this whole thing spins on its own.</footer>
+  <footer class="foot">Pick a show, pick a category, spin.</footer>
 </div>
 
 <div class="result-modal" id="resultModal">
@@ -718,8 +693,8 @@
 
 <div class="result-modal" id="characterModal">
   <div class="result-modal-card wanted-card">
-    <div class="wanted-heading">WANTED</div>
-    <div class="wanted-sub">Dead or Alive</div>
+    <div class="wanted-heading" id="charHeading">WANTED</div>
+    <div class="wanted-sub" id="charSub">Dead or Alive</div>
     <div class="wanted-portrait">
       <svg viewBox="0 0 64 64" fill="none" aria-hidden="true">
         <circle cx="32" cy="24" r="14" fill="currentColor"/>
@@ -738,34 +713,65 @@
 <script>
 (function(){
   "use strict";
-
-  var DEFAULT_CATEGORIES = {
-    "Age": ["0-5","5-15","15-25","25-50","50-75","75-100","100-800"],
-    "Race": ["Humans","Fish-Men","Merfolk","Giants","Ancient Giants","Minks","Skypieans","Lunarians","Cyborgs","Hybrids","Tontatta","Buccaneers","Germa Humans"],
-    "Affiliation": ["Pirate","Marine","Revolutionary Army","World Government","Bounty Hunter","Warlord","Cipher Pol","Civilian","Yonko Crew Member","Emperor of the Sea"],
-    "Sword + DF": ["Sword + DF","More Than 1 DF","Swordsman","Yes","No"],
-    "Weapon Mastery": ["Beginner 🌱","Average ⚔️","Skilled 🔥","Advanced 💪","Master 🎓","Zoro Level 🗡️","Katakuri Level 🍡","Mihawk Level 🦅","Shanks Level 🔴","Rayleigh Level 🥃","Roger Level 👑"],
-    "Armament Haki": ["Beginner 🌱","Average ⚔️","Skilled 🔥","Advanced 💪","Master 🎓","Katakuri Level 🍡","Luffy Level 🔴","Shanks Level 🌊","Rayleigh Level 🥃","World's Strongest 🌍"],
-    "Observation Haki": ["Beginner 🌱","Average ⚔️","Skilled 🔥","Advanced 💪","Master 🎓","Katakuri Level 🍡","Mihawk Level 🦅","Shanks Level 🔴","World's Strongest 🌍"],
-    "Conqueror's Haki": ["Latent 🌱","Basic ⚔️","Controlled 🔥","Advanced 💪","Master 🎓","Shanks Level 🔴","Roger Level 👑","God Level ⚡","Imu Level 🌑","Joy Boy Level ☀️"],
-    "Strength": ["Beginner 🌱","Average ⚔️","Skilled 🔥","Advanced 💪","Master 🎓","Katakuri Level 🍡","Kaido Level 🐉","Big Mom Level 🍰","Whitebeard Level 🌋","Prime Garp Level 👊","Rocks Level ☠️","Roger Level 👑","Imu Level 🌑","God Level ⚡"],
-    "Durability": ["Beginner 🌱","Average ⚔️","Skilled 🔥","Advanced 💪","Master 🎓","Katakuri Level 🍡","Kaido Level 🐉","Whitebeard Level 🌋","Big Mom Level 🍰","Roger Level 👑","Imu Level 🌑","God Level ⚡"],
-    "Speed": ["Beginner 🌱","Average ⚔️","Skilled 🔥","Advanced 💪","Master 🎓","Katakuri Level 🍡","CP0 Level 🕴️","Kizaru Level ⚡","Shanks Level 🔴","Gear 5 Luffy Level ☀️","World's Fastest 🌍"],
-    "Intelligence": ["Beginner 🌱","Average ⚔️","Skilled 🔥","Advanced 💪","Master 🎓","Genius 💡","Robin Level 📚","Law Level 🩺","Sengoku Level ⚖️","Vega Punk Level 🔬","World's Smartest 🌍"],
-    "Devil Fruit Types": ["Paramecia","Zoan","Ancient Zoan","Mythical Zoan","Logia","Special Paramecia"],
-    "Types of Haki": ["Armament Haki (Busoshoku)","Observation Haki (Kenbunshoku)","Conqueror's Haki (Haoshoku)"],
-    "Yes / No": ["Yes","No"],
-    "Devil Fruits": ["Hito Hito no Mi (Model: Nika)","Mera Mera no Mi (Model: Fire)","Hie Hie no Mi (Model: Ice)","Suna Suna no Mi (Model: Sand)","Yami Yami no Mi (Model: Darkness)","Pika Pika no Mi (Model: Light)","Goro Goro no Mi (Model: Lightning)","Moku Moku no Mi (Model: Smoke)","Numa Numa no Mi (Model: Swamp)","Gasu Gasu no Mi (Model: Gas)","Magu Magu no Mi (Model: Magma)","Ryu Ryu no Mi (Model: Allosaurus)","Ryu Ryu no Mi (Model: Spinosaurus)","Ryu Ryu no Mi (Model: Pteranodon)","Ryu Ryu no Mi (Model: Brachiosaurus)","Ryu Ryu no Mi (Model: Pachycephalosaurus)","Zou Zou no Mi (Model: Mammoth)","Uo Uo no Mi (Model: Seiryu)","Inu Inu no Mi (Model: Okuchi no Makami)","Tori Tori no Mi (Model: Phoenix)","Hito Hito no Mi (Model: Daibutsu)","Hana Hana no Mi (Model: Flower)","Bara Bara no Mi (Model: Chop-Chop)","Sube Sube no Mi (Model: Slip)","Bomu Bomu no Mi (Model: Bomb)","Doru Doru no Mi (Model: Wax)","Baku Baku no Mi (Model: Munch)","Mane Mane no Mi (Model: Copy)","Toge Toge no Mi (Model: Spike)","Ori Ori no Mi (Model: Cage)","Noro Noro no Mi (Model: Slow)","Doa Doa no Mi (Model: Door)","Awa Awa no Mi (Model: Bubble)","Supa Supa no Mi (Model: Blade)","Bane Bane no Mi (Model: Spring)","Nikyu Nikyu no Mi (Model: Paw)","Horo Horo no Mi (Model: Ghost)","Suke Suke no Mi (Model: Invisible)","Yomi Yomi no Mi (Model: Revive)","Kage Kage no Mi (Model: Shadow)","Ito Ito no Mi (Model: String)","Hobi Hobi no Mi (Model: Toy)","Doku Doku no Mi (Model: Poison)","Chiyu Chiyu no Mi (Model: Heal)","Buki Buki no Mi (Model: Weapon)","Kira Kira no Mi (Model: Diamond)","Bari Bari no Mi (Model: Barrier)","Nui Nui no Mi (Model: Stitch)","Giro Giro no Mi (Model: X-Ray)","Mero Mero no Mi (Model: Love)","Mochi Mochi no Mi (Model: Mochi)","Soru Soru no Mi (Model: Soul)","Ope Ope no Mi (Model: Surgery)","Zushi Zushi no Mi (Model: Gravity)","Fuwa Fuwa no Mi (Model: Float)","Gura Gura no Mi (Model: Quake)","Pero Pero no Mi (Model: Candy)","Bisu Bisu no Mi (Model: Biscuit)","Memo Memo no Mi (Model: Memory)"]
+  var CATEGORY_DEFS = {
+    "One Piece": {
+      "Age": ["0-5","5-15","15-25","25-50","50-75","75-100","100-800"],
+      "Race": ["Humans","Fish-Men","Merfolk","Giants","Ancient Giants","Minks","Skypieans","Lunarians","Cyborgs","Hybrids","Tontatta","Buccaneers","Germa Humans"],
+      "Affiliation": ["Pirate","Marine","Revolutionary Army","World Government","Bounty Hunter","Warlord","Cipher Pol","Civilian","Yonko Crew Member","Emperor of the Sea"],
+      "Sword + DF": ["Sword + DF","More Than 1 DF","Swordsman","Yes","No"],
+      "Weapon Mastery": ["Beginner 🌱","Average ⚔️","Skilled 🔥","Advanced 💪","Master 🎓","Zoro Level 🗡️","Katakuri Level 🍡","Mihawk Level 🦅","Shanks Level 🔴","Rayleigh Level 🥃","Roger Level 👑"],
+      "Armament Haki": ["Beginner 🌱","Average ⚔️","Skilled 🔥","Advanced 💪","Master 🎓","Katakuri Level 🍡","Luffy Level 🔴","Shanks Level 🌊","Rayleigh Level 🥃","World's Strongest 🌍"],
+      "Observation Haki": ["Beginner 🌱","Average ⚔️","Skilled 🔥","Advanced 💪","Master 🎓","Katakuri Level 🍡","Mihawk Level 🦅","Shanks Level 🔴","World's Strongest 🌍"],
+      "Conqueror's Haki": ["Latent 🌱","Basic ⚔️","Controlled 🔥","Advanced 💪","Master 🎓","Shanks Level 🔴","Roger Level 👑","God Level ⚡","Imu Level 🌑","Joy Boy Level ☀️"],
+      "Strength": ["Beginner 🌱","Average ⚔️","Skilled 🔥","Advanced 💪","Master 🎓","Katakuri Level 🍡","Kaido Level 🐉","Big Mom Level 🍰","Whitebeard Level 🌋","Prime Garp Level 👊","Rocks Level ☠️","Roger Level 👑","Imu Level 🌑","God Level ⚡"],
+      "Durability": ["Beginner 🌱","Average ⚔️","Skilled 🔥","Advanced 💪","Master 🎓","Katakuri Level 🍡","Kaido Level 🐉","Whitebeard Level 🌋","Big Mom Level 🍰","Roger Level 👑","Imu Level 🌑","God Level ⚡"],
+      "Speed": ["Beginner 🌱","Average ⚔️","Skilled 🔥","Advanced 💪","Master 🎓","Katakuri Level 🍡","CP0 Level 🕴️","Kizaru Level ⚡","Shanks Level 🔴","Gear 5 Luffy Level ☀️","World's Fastest 🌍"],
+      "Intelligence": ["Beginner 🌱","Average ⚔️","Skilled 🔥","Advanced 💪","Master 🎓","Genius 💡","Robin Level 📚","Law Level 🩺","Sengoku Level ⚖️","Vega Punk Level 🔬","World's Smartest 🌍"],
+      "Devil Fruit Types": ["Paramecia","Zoan","Ancient Zoan","Mythical Zoan","Logia","Special Paramecia"],
+      "Types of Haki": ["Armament Haki (Busoshoku)","Observation Haki (Kenbunshoku)","Conqueror's Haki (Haoshoku)"],
+      "Yes / No": ["Yes","No"],
+      "Devil Fruits": ["Hito Hito no Mi (Model: Nika)","Mera Mera no Mi (Model: Fire)","Hie Hie no Mi (Model: Ice)","Suna Suna no Mi (Model: Sand)","Yami Yami no Mi (Model: Darkness)","Pika Pika no Mi (Model: Light)","Goro Goro no Mi (Model: Lightning)","Moku Moku no Mi (Model: Smoke)","Numa Numa no Mi (Model: Swamp)","Gasu Gasu no Mi (Model: Gas)","Magu Magu no Mi (Model: Magma)","Ryu Ryu no Mi (Model: Allosaurus)","Ryu Ryu no Mi (Model: Spinosaurus)","Ryu Ryu no Mi (Model: Pteranodon)","Ryu Ryu no Mi (Model: Brachiosaurus)","Ryu Ryu no Mi (Model: Pachycephalosaurus)","Zou Zou no Mi (Model: Mammoth)","Uo Uo no Mi (Model: Seiryu)","Inu Inu no Mi (Model: Okuchi no Makami)","Tori Tori no Mi (Model: Phoenix)","Hito Hito no Mi (Model: Daibutsu)","Hana Hana no Mi (Model: Flower)","Bara Bara no Mi (Model: Chop-Chop)","Sube Sube no Mi (Model: Slip)","Bomu Bomu no Mi (Model: Bomb)","Doru Doru no Mi (Model: Wax)","Baku Baku no Mi (Model: Munch)","Mane Mane no Mi (Model: Copy)","Toge Toge no Mi (Model: Spike)","Ori Ori no Mi (Model: Cage)","Noro Noro no Mi (Model: Slow)","Doa Doa no Mi (Model: Door)","Awa Awa no Mi (Model: Bubble)","Supa Supa no Mi (Model: Blade)","Bane Bane no Mi (Model: Spring)","Nikyu Nikyu no Mi (Model: Paw)","Horo Horo no Mi (Model: Ghost)","Suke Suke no Mi (Model: Invisible)","Yomi Yomi no Mi (Model: Revive)","Kage Kage no Mi (Model: Shadow)","Ito Ito no Mi (Model: String)","Hobi Hobi no Mi (Model: Toy)","Doku Doku no Mi (Model: Poison)","Chiyu Chiyu no Mi (Model: Heal)","Buki Buki no Mi (Model: Weapon)","Kira Kira no Mi (Model: Diamond)","Bari Bari no Mi (Model: Barrier)","Nui Nui no Mi (Model: Stitch)","Giro Giro no Mi (Model: X-Ray)","Mero Mero no Mi (Model: Love)","Mochi Mochi no Mi (Model: Mochi)","Soru Soru no Mi (Model: Soul)","Ope Ope no Mi (Model: Surgery)","Zushi Zushi no Mi (Model: Gravity)","Fuwa Fuwa no Mi (Model: Float)","Gura Gura no Mi (Model: Quake)","Pero Pero no Mi (Model: Candy)","Bisu Bisu no Mi (Model: Biscuit)","Memo Memo no Mi (Model: Memory)"]
+    },
+    "JJK": {
+      "Age": ["0-5","5-15","15-25","25-50","50-75","75-100","100-800"],
+      "Race / Type": ["Human","Sorcerer","Non-Sorcerer","Cursed Spirit","Cursed Corpse","Mixed-Blood","Heavenly Restriction","Cursed Object"],
+      "Affiliation": ["Jujutsu High (Tokyo)","Jujutsu High (Kyoto)","Jujutsu Society Higher-Up","Zenin Clan","Gojo Clan","Kamo Clan","Culling Game Player","Cursed Spirit","Time Vessel Association","Star Religious Group"],
+      "Grade": ["Grade 4","Grade 3","Grade 2","Grade 1","Semi-Special Grade","Special Grade"],
+      "Cursed Tool + CT": ["Cursed Tool + CT","More Than 1 Technique","Swordsman","Yes","No"],
+      "Weapon Mastery": ["Beginner 🌱","Average ⚔️","Skilled 🔥","Advanced 💪","Master 🎓","Maki Level ⚔️","Todo Level 👊","Toji Level 🗡️","Gojo Level 🌀"],
+      "Cursed Energy Control": ["Beginner 🌱","Average ⚔️","Skilled 🔥","Advanced 💪","Master 🎓","Nobara Level 🔨","Yuji Level 👊","Megumi Level 🐺","Sukuna Level 👹","Gojo Level 🌀","World's Strongest 🌍"],
+      "Six Eyes & Perception": ["Beginner 🌱","Average ⚔️","Skilled 🔥","Advanced 💪","Master 🎓","Megumi Level 🐺","Nanami Level ⏱️","Sukuna Level 👹","Gojo Level 🌀","World's Strongest 🌍"],
+      "Domain Expansion": ["Can't Use ❌","Simple Domain 🔲","Full Domain Expansion 🌀","Sukuna Level 👹","Gojo Level 🌀","Kenjaku Level 🧠","Mahoraga Level ⚙️"],
+      "Strength": ["Beginner 🌱","Average ⚔️","Skilled 🔥","Advanced 💪","Master 🎓","Todo Level 👊","Jogo Level 🌋","Sukuna Level 👹","Gojo Level 🌀","Kenjaku Level 🧠"],
+      "Durability": ["Beginner 🌱","Average ⚔️","Skilled 🔥","Advanced 💪","Master 🎓","Mahito Level 🧟","Sukuna Level 👹","Gojo Level 🌀","Kenjaku Level 🧠"],
+      "Speed": ["Beginner 🌱","Average ⚔️","Skilled 🔥","Advanced 💪","Master 🎓","Maki Level ⚔️","Toji Level 🗡️","Gojo Level 🌀","World's Fastest 🌍"],
+      "Intelligence": ["Beginner 🌱","Average ⚔️","Skilled 🔥","Advanced 💪","Master 🎓","Genius 💡","Megumi Level 🐺","Nanami Level ⏱️","Gojo Level 🌀","Kenjaku Level 🧠","World's Smartest 🌍"],
+      "Cursed Technique Types": ["Innate Technique","Inherited Technique","Heavenly Restriction","Cursed Tool","Reverse Cursed Technique"],
+      "Types of Jujutsu Power": ["Cursed Energy","Domain Expansion","Reverse Cursed Technique","Binding Vow","Simple Domain"],
+      "Yes / No": ["Yes","No"],
+      "Cursed Techniques": ["Limitless (User: Gojo Satoru)","Six Eyes (User: Gojo Satoru)","Ten Shadows Technique (User: Megumi Fushiguro)","Boogie Woogie (User: Aoi Todo)","Straw Doll Technique (User: Nobara Kugisaki)","Divergent Fist (User: Yuji Itadori)","Black Flash (User: Various Sorcerers)","Idle Transfiguration (User: Mahito)","Ratio Technique (User: Kento Nanami)","Cursed Speech (User: Toge Inumaki)","Projection Sorcery (User: Kokichi Muta)","Rot Technique (User: Mai Zenin)","Construction (User: Maki Zenin)","Blood Manipulation (User: Choso)","Disaster Flames (User: Jogo)","Dismantle (User: Ryomen Sukuna)","Cleave (User: Ryomen Sukuna)","Fire Arrow (User: Ryomen Sukuna)","Malevolent Shrine (User: Ryomen Sukuna)","Copy (User: Kenjaku)","Idle Death Gamble (User: Fumihiko Takaba)","Hollow Purple (User: Gojo Satoru)","Thunder Manipulation (User: Hajime Kashimo)","World Cup (User: Yuki Tsukumo)","Piercing Blood (User: Choso)"]
+    }
   };
 
-  var STORAGE_KEY = "strawhat-randomizer-v1";
-  var CATEGORY_NAMES = Object.keys(DEFAULT_CATEGORIES);
+  var CREATE_SEQUENCES = {
+    "One Piece": ["Age","Race","Affiliation","Devil Fruits","Weapon Mastery","Armament Haki","Observation Haki","Conqueror's Haki","Strength","Durability","Speed","Intelligence"],
+    "JJK": ["Age","Race / Type","Affiliation","Grade","Cursed Techniques","Weapon Mastery","Cursed Energy Control","Six Eyes & Perception","Domain Expansion","Strength","Durability","Speed","Intelligence"]
+  };
+
+  var LONG_LIST_CATEGORIES = { "Devil Fruits": true, "Cursed Techniques": true };
+
+  var FRANCHISES = Object.keys(CATEGORY_DEFS);
+  var STORAGE_KEY = "ytwheel-v1";
   var SEGMENT_TOKENS = ["--seg-a","--seg-b","--seg-c","--seg-d","--seg-e","--seg-f"];
-  var CREATE_SEQUENCE = ["Age","Race","Affiliation","Devil Fruits","Weapon Mastery","Armament Haki","Observation Haki","Conqueror's Haki","Strength","Durability","Speed","Intelligence"];
+
+  function storageKey(franchise, category){
+    return franchise + "::" + category;
+  }
 
   var state = {
     lists: {},
-    current: CATEGORY_NAMES[0],
+    franchise: FRANCHISES[0],
+    current: Object.keys(CATEGORY_DEFS[FRANCHISES[0]])[0],
     rotation: 0,
     spinning: false,
     log: [],
@@ -793,9 +799,12 @@
 
   (function init(){
     var saved = loadSaved();
-    CATEGORY_NAMES.forEach(function(name){
-      var custom = saved[name];
-      state.lists[name] = (Array.isArray(custom) && custom.length >= 2) ? custom : DEFAULT_CATEGORIES[name].slice();
+    FRANCHISES.forEach(function(franchise){
+      Object.keys(CATEGORY_DEFS[franchise]).forEach(function(cat){
+        var key = storageKey(franchise, cat);
+        var custom = saved[key];
+        state.lists[key] = (Array.isArray(custom) && custom.length >= 2) ? custom : CATEGORY_DEFS[franchise][cat].slice();
+      });
     });
   })();
 
@@ -821,17 +830,24 @@
   var modalCategory = document.getElementById("modalCategory");
   var modalText = document.getElementById("modalText");
   var modalClose = document.getElementById("modalClose");
+  var franchiseToggle = document.getElementById("franchiseToggle");
   var modeToggle = document.getElementById("modeToggle");
   var createProgress = document.getElementById("createProgress");
   var characterModal = document.getElementById("characterModal");
+  var charHeading = document.getElementById("charHeading");
+  var charSub = document.getElementById("charSub");
   var characterList = document.getElementById("characterList");
   var wantedBounty = document.getElementById("wantedBounty");
   var characterAgain = document.getElementById("characterAgain");
   var characterNormal = document.getElementById("characterNormal");
   var modalOnClose = null;
 
+  function currentCategories(){
+    return CATEGORY_DEFS[state.franchise];
+  }
+
   function currentList(){
-    return state.lists[state.current];
+    return state.lists[storageKey(state.franchise, state.current)];
   }
 
   function readCssVar(name){
@@ -840,7 +856,7 @@
 
   function buildChips(){
     chipsEl.innerHTML = "";
-    CATEGORY_NAMES.forEach(function(name){
+    Object.keys(currentCategories()).forEach(function(name){
       var b = document.createElement("button");
       b.className = "chip" + (name === state.current ? " active" : "");
       b.type = "button";
@@ -853,6 +869,8 @@
         updateHint();
         renderLegend();
         posterCategory.textContent = name;
+        posterResult.textContent = "Spin to reveal a result";
+        posterMeta.textContent = "Normal mode";
       });
       chipsEl.appendChild(b);
     });
@@ -897,11 +915,31 @@
     if(e.target === resultModal) hideResultModal();
   });
 
+  function setFranchise(franchise){
+    if(state.spinning) return;
+    state.franchise = franchise;
+    var buttons = franchiseToggle.querySelectorAll(".mode-btn");
+    buttons.forEach(function(b){
+      b.classList.toggle("active", b.getAttribute("data-franchise") === franchise);
+    });
+    state.current = Object.keys(currentCategories())[0];
+    buildChips();
+    drawWheel();
+    updateHint();
+    renderLegend();
+    posterCategory.textContent = state.current;
+    posterResult.textContent = "Spin to reveal a result";
+    posterMeta.textContent = "Normal mode";
+  }
+
   function setMode(mode){
     state.mode = mode;
     var buttons = modeToggle.querySelectorAll(".mode-btn");
     buttons.forEach(function(b){
       b.classList.toggle("active", b.getAttribute("data-mode") === mode);
+    });
+    franchiseToggle.querySelectorAll(".mode-btn").forEach(function(b){
+      b.disabled = (mode === "create");
     });
     if(mode === "create"){
       chipsEl.hidden = true;
@@ -910,7 +948,7 @@
     } else {
       chipsEl.hidden = false;
       createProgress.hidden = true;
-      state.current = CATEGORY_NAMES[0];
+      state.current = Object.keys(currentCategories())[0];
       buildChips();
       drawWheel();
       updateHint();
@@ -928,7 +966,8 @@
   }
 
   function loadCreateStep(){
-    var name = CREATE_SEQUENCE[state.createStep];
+    var seq = CREATE_SEQUENCES[state.franchise];
+    var name = seq[state.createStep];
     state.current = name;
     drawWheel();
     updateHint();
@@ -936,18 +975,29 @@
     posterCategory.textContent = name;
     posterResult.textContent = "Spin to roll your " + name;
     posterMeta.textContent = "Character build in progress";
-    createProgress.textContent = "Step " + (state.createStep + 1) + " of " + CREATE_SEQUENCE.length + " — " + name;
+    createProgress.textContent = "Step " + (state.createStep + 1) + " of " + seq.length + " — " + name;
   }
 
   function randomBounty(){
     var n = 5000000 + Math.floor(Math.random() * 4995000000);
-    return n.toLocaleString("en-US").replace(/,/g, ",");
+    return n.toLocaleString("en-US");
   }
 
   function showCharacterSheet(){
-    wantedBounty.innerHTML = "Bounty: <span>" + randomBounty() + "</span> Berries";
+    var seq = CREATE_SEQUENCES[state.franchise];
+    if(state.franchise === "One Piece"){
+      charHeading.textContent = "WANTED";
+      charSub.textContent = "Dead or Alive";
+      wantedBounty.innerHTML = "Bounty: <span>" + randomBounty() + "</span> Berries";
+    } else {
+      var grades = CATEGORY_DEFS["JJK"]["Grade"];
+      var grade = grades[Math.floor(Math.random() * grades.length)];
+      charHeading.textContent = "SORCERER FILE";
+      charSub.textContent = "Jujutsu High Registry";
+      wantedBounty.innerHTML = "Grade: <span>" + grade + "</span>";
+    }
     characterList.innerHTML = "";
-    CREATE_SEQUENCE.forEach(function(cat){
+    seq.forEach(function(cat){
       var row = document.createElement("div");
       row.className = "character-row";
       var label = document.createElement("span");
@@ -962,6 +1012,13 @@
     });
     characterModal.classList.add("show");
   }
+
+  franchiseToggle.addEventListener("click", function(e){
+    var btn = e.target.closest(".mode-btn");
+    if(!btn || btn.disabled || state.spinning) return;
+    var franchise = btn.getAttribute("data-franchise");
+    if(franchise !== state.franchise) setFranchise(franchise);
+  });
 
   modeToggle.addEventListener("click", function(e){
     var btn = e.target.closest(".mode-btn");
@@ -991,7 +1048,7 @@
   }
 
   function wheelLabel(text){
-    return text.replace(/\s*\(Model:[^)]*\)\s*$/i, "");
+    return text.replace(/\s*\((?:Model|User):[^)]*\)\s*$/i, "");
   }
 
   function layoutLabel(ctx, text, maxWidth, baseSize, minSize){
@@ -1062,11 +1119,11 @@
       ctx.rotate(start + segAngle / 2);
       ctx.textBaseline = "middle";
       ctx.fillStyle = segText;
-      var isDevilFruits = state.current === "Devil Fruits";
+      var isLongList = !!LONG_LIST_CATEGORIES[state.current];
       var rawLabel = wheelLabel(list[i]);
       var textX = radius * 0.66;
       ctx.textAlign = "center";
-      var floorSize = isDevilFruits ? 9 : 12;
+      var floorSize = isLongList ? 9 : 12;
       var layout = layoutLabel(ctx, rawLabel, maxTextWidth, baseFont, floorSize);
       ctx.font = "600 " + layout.size + "px Archivo, sans-serif";
       if(layout.lines.length === 1){
@@ -1084,28 +1141,6 @@
     ctx.lineWidth = 6;
     ctx.strokeStyle = readCssVar("--brass");
     ctx.stroke();
-
-    var handleCount = 8;
-    var handleColor = readCssVar("--brass");
-    var handleLight = readCssVar("--brass-light");
-    for(var h = 0; h < handleCount; h++){
-      var a = (Math.PI * 2 / handleCount) * h - Math.PI / 2;
-      var x1 = cx + Math.cos(a) * radius;
-      var y1 = cy + Math.sin(a) * radius;
-      var x2 = cx + Math.cos(a) * (radius + size * 0.045);
-      var y2 = cy + Math.sin(a) * (radius + size * 0.045);
-      ctx.beginPath();
-      ctx.moveTo(x1, y1);
-      ctx.lineTo(x2, y2);
-      ctx.lineWidth = size * 0.028;
-      ctx.strokeStyle = handleColor;
-      ctx.lineCap = "round";
-      ctx.stroke();
-      ctx.beginPath();
-      ctx.arc(x2, y2, size * 0.024, 0, Math.PI * 2);
-      ctx.fillStyle = handleLight;
-      ctx.fill();
-    }
 
     ctx.beginPath();
     ctx.arc(cx, cy, size * 0.16, 0, Math.PI * 2);
@@ -1178,7 +1213,8 @@
 
       if(state.mode === "create"){
         state.createResults[category] = result;
-        var isLast = state.createStep >= CREATE_SEQUENCE.length - 1;
+        var seq = CREATE_SEQUENCES[state.franchise];
+        var isLast = state.createStep >= seq.length - 1;
         showResultModal(category, result, isLast ? "See Your Character" : "Next", function(){
           if(isLast){
             showCharacterSheet();
@@ -1212,7 +1248,7 @@
       editorArea.style.borderColor = readCssVar("--crimson");
       return;
     }
-    state.lists[state.current] = lines;
+    state.lists[storageKey(state.franchise, state.current)] = lines;
     persist();
     editor.classList.remove("open");
     drawWheel();
@@ -1223,7 +1259,7 @@
   });
 
   resetBtn.addEventListener("click", function(){
-    state.lists[state.current] = DEFAULT_CATEGORIES[state.current].slice();
+    state.lists[storageKey(state.franchise, state.current)] = currentCategories()[state.current].slice();
     persist();
     drawWheel();
     updateHint();

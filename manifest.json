@@ -1,12 +1,12 @@
 {
-  "name": "One Piece Wheel",
-  "short_name": "OP Wheel",
-  "description": "A pirate-helm spin wheel for generating random One Piece character traits.",
+  "name": "YT Wheel",
+  "short_name": "YT Wheel",
+  "description": "A spin wheel for generating random character traits for your videos.",
   "start_url": ".",
   "scope": ".",
   "display": "standalone",
-  "background_color": "#f4e4bd",
-  "theme_color": "#c8891a",
+  "background_color": "#f4f4f7",
+  "theme_color": "#e0263f",
   "orientation": "any",
   "icons": [
     { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
